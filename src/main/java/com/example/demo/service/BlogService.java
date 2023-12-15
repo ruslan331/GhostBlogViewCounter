@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class BlogService {
@@ -16,8 +15,10 @@ public class BlogService {
 
     @Transactional
     public void updateViews(Integer postId) {
-        Optional<Blog> optionalBlog = blogRepository.findByPostId(postId);
-        Blog blog = optionalBlog.orElseThrow(() -> new RuntimeException("Blog post not found"));
+        Blog blog = blogRepository.findByPostId(postId);
+        if (blog == null) {
+            throw new RuntimeException("Blog post not found");
+        }
 
         blog.setViews(blog.getViews() + 1);
         blogRepository.save(blog);
@@ -25,15 +26,16 @@ public class BlogService {
     }
 
     public int getViews(Integer postId) {
-        Optional<Blog> optionalBlog = blogRepository.findByPostId(postId);
-        Blog blog = optionalBlog.orElseThrow(() -> new RuntimeException("Blog post not found"));
+        Blog blog = blogRepository.findByPostId(postId);
+        if (blog == null) {
+            throw new RuntimeException("Blog post not found");
+        }
 
         return blog.getViews();
     }
 
     public void addView(Integer postId) {
-        Optional<Blog> optionalBlog = blogRepository.findByPostId(postId);
-        Blog blog = optionalBlog.orElseThrow(() -> new RuntimeException("Blog post not found"));
+        Blog blog = new Blog();
         blog.setPostId(postId);
         blog.setViews(0); // Assuming you want to initialize with 1 view
 
