@@ -18,7 +18,7 @@
         const postId1= 12;  // Replace with the actual post ID dynamically
         console.log('Fetching to add view');
 
-        fetch(`/api/blog/addView?postId=${postId1}`, {
+        fetch(`/api/blog/addView?postid=${postId1}`, {
             method: 'POST',
         })
             .then(response => {
@@ -40,7 +40,7 @@
             .catch(error => console.error('Error adding view:', error));
 
         console.log('Fetching to update views');
-        fetch(`/api/blog/updateViews?postId=${postId}`, {
+        fetch(`/api/blog/updateViews?postid=${postId}`, {
             method: 'POST',
         })
             .then(response => {
@@ -63,7 +63,7 @@
 
         // Fetch to get views
         console.log('Fetching to get views');
-        fetch(`/api/blog/getViews?postId=${postId}`)
+        fetch(`/api/blog/getViews?postid=${postId}`)
             .then(response => response.json())
             .then(views => {
                 console.log(`Number of views: ${views}`);
