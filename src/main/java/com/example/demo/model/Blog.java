@@ -9,8 +9,8 @@ public class Blog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "postId")
-    private Integer postId;
+    @Column(name = "postid")
+    private Integer postid;
 
     private Integer views;
 
@@ -19,8 +19,8 @@ public class Blog {
         return id;
     }
 
-    public Integer getPostId() {
-        return postId;
+    public Integer getPostid() {
+        return postid;
     }
 
     public Integer getViews() {
@@ -32,8 +32,8 @@ public class Blog {
         this.id = id;
     }
 
-    public void setPostId(Integer postId) {
-        this.postId = postId;
+    public void setPostid(Integer postId) {
+        this.postid = postId;
     }
 
     public void setViews(Integer views) {

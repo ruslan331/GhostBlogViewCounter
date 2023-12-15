@@ -49,3 +49,12 @@ databaseChangeLog:
               - column:
                   name: views
                   value: "3"
+  - changeSet:
+      id: renameColumn-example
+      author: ruslan
+      changes:
+        - renameColumn:
+            columnDataType: int
+            newColumnName: postid
+            oldColumnName: postId
+            tableName: blog_views

@@ -14,8 +14,8 @@ public class BlogService {
     private BlogRepository blogRepository;
 
     @Transactional
-    public void updateViews(Integer postId) {
-        Blog blog = blogRepository.findByPostId(postId);
+    public void updateViews(Integer postid) {
+        Blog blog = blogRepository.findByPostid(postid);
         if (blog == null) {
             throw new RuntimeException("Blog post not found");
         }
@@ -25,8 +25,8 @@ public class BlogService {
         System.out.println("ASDASDASDASDASDA");
     }
 
-    public int getViews(Integer postId) {
-        Blog blog = blogRepository.findByPostId(postId);
+    public int getViews(Integer postid) {
+        Blog blog = blogRepository.findByPostid(postid);
         if (blog == null) {
             throw new RuntimeException("Blog post not found");
         }
@@ -34,9 +34,9 @@ public class BlogService {
         return blog.getViews();
     }
 
-    public void addView(Integer postId) {
+    public void addView(Integer postid) {
         Blog blog = new Blog();
-        blog.setPostId(postId);
+        blog.setPostid(postid);
         blog.setViews(0); // Assuming you want to initialize with 1 view
 
         blogRepository.save(blog);

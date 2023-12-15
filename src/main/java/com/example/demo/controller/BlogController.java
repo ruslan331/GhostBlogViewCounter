@@ -17,9 +17,9 @@ public class BlogController {
     private BlogService blogService;
 
     @PostMapping("/updateViews")
-    public ResponseEntity<String> updateViews(@RequestParam Integer postId) {
+    public ResponseEntity<String> updateViews(@RequestParam Integer postid) {
         try {
-            blogService.updateViews(postId);
+            blogService.updateViews(postid);
             return ResponseEntity.ok("Views updated successfully");
         } catch (Exception e) {
             e.printStackTrace(); // Log the exception details
@@ -28,9 +28,9 @@ public class BlogController {
     }
 
     @GetMapping("/getViews")
-    public ResponseEntity<Integer> getViews(@RequestParam Integer postId) {
+    public ResponseEntity<Integer> getViews(@RequestParam Integer postid) {
         try {
-            int views = blogService.getViews(postId);
+            int views = blogService.getViews(postid);
             return ResponseEntity.ok(views);
         } catch (Exception e) {
             e.printStackTrace(); // Log the exception details
@@ -43,13 +43,13 @@ public class BlogController {
         List<Blog> blogs = blogService.getAllBlogs();
         model.addAttribute("blogs", blogs);
         // Log the data
-        blogs.forEach(blog -> System.out.println("Blog ID: " + blog.getId() + ", Post ID: " + blog.getPostId() + ", Views: " + blog.getViews()));
+        blogs.forEach(blog -> System.out.println("Blog ID: " + blog.getId() + ", Post ID: " + blog.getPostid() + ", Views: " + blog.getViews()));
         return "blogViews"; // assuming you have a Thymeleaf template named "blogViews.html"
     }
     @PostMapping("/addView")
-    public ResponseEntity<String> addView(@RequestParam Integer postId) {
+    public ResponseEntity<String> addView(@RequestParam Integer postid) {
         try {
-            blogService.addView(postId);
+            blogService.addView(postid);
             return ResponseEntity.ok("View added successfully");
         } catch (Exception e) {
             e.printStackTrace();
