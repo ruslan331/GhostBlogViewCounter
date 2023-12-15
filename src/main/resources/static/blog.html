@@ -12,63 +12,7 @@
     <p id="viewsCount">Views: Loading...</p>
 </div>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const currentUrl = window.location.origin+window.location.pathname;
-        console.log(currentUrl)
-        console.log('Fetching to add view');
-
-        fetch(`https://fathomless-brook-54697-d6085ecbdfdb.herokuapp.com/api/blog/addView?uri=${currentUrl}`, {
-            method: 'POST',
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Add View Response:', data);
-
-                if (data.message) {
-                    console.log('Message:', data.message);
-                } else {
-                    console.error('Error adding view: Response format is not as expected');
-                }
-            })
-            .catch(error => console.error('Error adding view:', error));
-
-        console.log('Fetching to update views');
-        fetch(`https://fathomless-brook-54697-d6085ecbdfdb.herokuapp.com/api/blog/updateViews?uri=${currentUrl}`, {
-            method: 'POST',
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Update Views Response:', data);
-
-                if (data.message) {
-                    console.log('Message:', data.message);
-                } else {
-                    console.error('Error updating views: Response format is not as expected');
-                }
-            })
-            .catch(error => console.error('Error updating views:', error));
-
-        console.log('Fetching to get views');
-        fetch(`https://fathomless-brook-54697-d6085ecbdfdb.herokuapp.com/api/blog/getViews?uri=${currentUrl}`)
-            .then(response => response.json())
-            .then(views => {
-                console.log(`Number of views: ${views}`);
-                document.getElementById('viewsCount').innerText = `Views: ${views}`;
-            })
-            .catch(error => console.error('Error getting views:', error));
-    });
-</script>
+<script src="https://raw.githubusercontent.com/ruslan331/GhostBlogViewCounter/main/ghostblogvcscript"></script>
 
 </body>
 </html>
