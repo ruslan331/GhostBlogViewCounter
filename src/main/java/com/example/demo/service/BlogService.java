@@ -35,12 +35,18 @@ public class BlogService {
     }
 
     public void addView(Integer postid) {
-        Blog blog = new Blog();
-        blog.setPostid(postid);
-        blog.setViews(0); // Assuming you want to initialize with 1 view
+        Blog existingBlog = blogRepository.findByPostid(postid);
 
-        blogRepository.save(blog);
-        System.out.println("View added successfully");
+        if (existingBlog == null) {
+            Blog newBlog = new Blog();
+            newBlog.setPostid(postid);
+            newBlog.setViews(0);
+
+            blogRepository.save(newBlog);
+            System.out.println("View added successfully");
+        } else {
+            System.out.println("View not added, record already exists for postid: " + postid);
+        }
     }
 
     public List<Blog> getAllBlogs() {

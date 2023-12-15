@@ -15,10 +15,30 @@
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const postId = 1;
-        const postId1= 12;  // Replace with the actual post ID dynamically
+        const postId1= 13;  // Replace with the actual post ID dynamically
         console.log('Fetching to add view');
 
         fetch(`/api/blog/addView?postid=${postId1}`, {
+            method: 'POST',
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json(); // Parse the response as JSON
+            })
+            .then(data => {
+                console.log('Add View Response:', data);
+
+                // Assuming the response has a 'message' property
+                if (data.message) {
+                    console.log('Message:', data.message);
+                } else {
+                    console.error('Error adding view: Response format is not as expected');
+                }
+            })
+            .catch(error => console.error('Error adding view:', error));
+        fetch(`/api/blog/addView?postid=${postId}`, {
             method: 'POST',
         })
             .then(response => {
