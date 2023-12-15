@@ -14,12 +14,13 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        const currentUrl = window.location.origin+window.location.pathname;
+        const currentUrl2 = window.location.origin+window.location.pathname;
+        const currentUrl = window.location.href;
         console.log(currentUrl)
         console.log('Fetching to add view');
         const currentUrl1= "https://articles.pulsoid.net/p/f7c44ddc-cd15-4829-8bb3-1ab24bcde480/";
 
-        fetch(`/api/blog/addView?uri=${currentUrl1}`, {
+        fetch(`/api/blog/addView?uri=${currentUrl}`, {
             method: 'POST',
         })
             .then(response => {
@@ -59,7 +60,7 @@
             .catch(error => console.error('Error adding view:', error));
 
         console.log('Fetching to update views');
-        fetch(`/api/blog/updateViews?uri=${currentUrl1}`, {
+        fetch(`/api/blog/updateViews?uri=${currentUrl}`, {
             method: 'POST',
         })
             .then(response => {
@@ -80,7 +81,7 @@
             .catch(error => console.error('Error updating views:', error));
 
         console.log('Fetching to get views');
-        fetch(`/api/blog/getViews?uri=${currentUrl1}`)
+        fetch(`/api/blog/getViews?uri=${currentUrl}`)
             .then(response => response.json())
             .then(views => {
                 console.log(`Number of views: ${views}`);
