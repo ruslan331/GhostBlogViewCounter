@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/blog")
+@CrossOrigin(origins = "https://ruslan.ghost.io")
 public class BlogController {
 
     @Autowired
