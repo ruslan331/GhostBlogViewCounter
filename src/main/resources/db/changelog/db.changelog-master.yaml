@@ -1,0 +1,51 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: ruslan
+      changes:
+        - createTable:
+            tableName: blog_views
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: postId
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: views
+                  type: int
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 2
+      author: ruslan
+      changes:
+        - insert:
+            tableName: blog_views
+            columns:
+              - column:
+                  name: postId
+                  value: "1"
+              - column:
+                  name: views
+                  value: "5"
+  - changeSet:
+      id: 3
+      author: ruslan
+      changes:
+        - insert:
+            tableName: blog_views
+            columns:
+              - column:
+                  name: postId
+                  value: "2"
+              - column:
+                  name: views
+                  value: "3"

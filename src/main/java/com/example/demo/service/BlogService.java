@@ -14,7 +14,7 @@ public class BlogService {
     private BlogRepository blogRepository;
 
     @Transactional
-    public void updateViews(Long postId) {
+    public void updateViews(Integer postId) {
         Blog blog = blogRepository.findById(postId)
                 .orElseThrow(() -> new RuntimeException("Blog post not found"));
 
@@ -23,7 +23,7 @@ public class BlogService {
         System.out.println("ASDASDASDASDASDA");
     }
 
-    public int getViews(Long postId) {
+    public int getViews(Integer postId) {
         Blog blog = blogRepository.findById(postId)
                 .orElseThrow(() -> new RuntimeException("Blog post not found"));
 

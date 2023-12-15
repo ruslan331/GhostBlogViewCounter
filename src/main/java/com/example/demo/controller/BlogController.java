@@ -17,7 +17,7 @@ public class BlogController {
     private BlogService blogService;
 
     @PostMapping("/updateViews")
-    public ResponseEntity<String> updateViews(@RequestParam Long postId) {
+    public ResponseEntity<String> updateViews(@RequestParam Integer postId) {
         try {
             blogService.updateViews(postId);
             return ResponseEntity.ok("Views updated successfully");
@@ -28,7 +28,7 @@ public class BlogController {
     }
 
     @GetMapping("/getViews")
-    public ResponseEntity<Integer> getViews(@RequestParam Long postId) {
+    public ResponseEntity<Integer> getViews(@RequestParam Integer postId) {
         try {
             int views = blogService.getViews(postId);
             return ResponseEntity.ok(views);
