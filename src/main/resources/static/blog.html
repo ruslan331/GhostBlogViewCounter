@@ -25,12 +25,11 @@
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
-                return response.json(); // Parse the response as JSON
+                return response.json();
             })
             .then(data => {
                 console.log('Add View Response:', data);
 
-                // Assuming the response has a 'message' property
                 if (data.message) {
                     console.log('Message:', data.message);
                 } else {
@@ -45,12 +44,11 @@
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
-                return response.json(); // Parse the response as JSON
+                return response.json();
             })
             .then(data => {
                 console.log('Add View Response:', data);
 
-                // Assuming the response has a 'message' property
                 if (data.message) {
                     console.log('Message:', data.message);
                 } else {
@@ -67,12 +65,11 @@
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
-                return response.json(); // Parse the response as JSON
+                return response.json();
             })
             .then(data => {
                 console.log('Update Views Response:', data);
 
-                // Assuming the response has a 'message' property
                 if (data.message) {
                     console.log('Message:', data.message);
                 } else {
@@ -81,13 +78,11 @@
             })
             .catch(error => console.error('Error updating views:', error));
 
-        // Fetch to get views
         console.log('Fetching to get views');
         fetch(`/api/blog/getViews?uri=${currentUrl}`)
             .then(response => response.json())
             .then(views => {
                 console.log(`Number of views: ${views}`);
-                // Display the number of views on your webpage
                 document.getElementById('viewsCount').innerText = `Views: ${views}`;
             })
             .catch(error => console.error('Error getting views:', error));
