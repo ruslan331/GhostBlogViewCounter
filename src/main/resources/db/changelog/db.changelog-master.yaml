@@ -15,7 +15,6 @@ databaseChangeLog:
               - column:
                   name: id
                   type: uuid
-                  autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false

@@ -14,11 +14,11 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        const postId = 1;
-        const postId1= 13;  // Replace with the actual post ID dynamically
+        const currentUrl = window.location.origin+window.location.pathname;
+        console.log(currentUrl)
         console.log('Fetching to add view');
 
-        fetch(`/api/blog/addView?postid=${postId1}`, {
+        fetch(`/api/blog/addView?postid=${currentUrl}`, {
             method: 'POST',
         })
             .then(response => {
@@ -38,7 +38,7 @@
                 }
             })
             .catch(error => console.error('Error adding view:', error));
-        fetch(`/api/blog/addView?postid=${postId}`, {
+        fetch(`/api/blog/addView?postid=${currentUrl}`, {
             method: 'POST',
         })
             .then(response => {
@@ -60,7 +60,7 @@
             .catch(error => console.error('Error adding view:', error));
 
         console.log('Fetching to update views');
-        fetch(`/api/blog/updateViews?postid=${postId}`, {
+        fetch(`/api/blog/updateViews?postid=${currentUrl}`, {
             method: 'POST',
         })
             .then(response => {
@@ -83,7 +83,7 @@
 
         // Fetch to get views
         console.log('Fetching to get views');
-        fetch(`/api/blog/getViews?postid=${postId}`)
+        fetch(`/api/blog/getViews?postid=${currentUrl}`)
             .then(response => response.json())
             .then(views => {
                 console.log(`Number of views: ${views}`);
