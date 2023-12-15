@@ -14,32 +14,11 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        const currentUrl2 = window.location.origin+window.location.pathname;
-        const currentUrl = window.location.href;
+        const currentUrl = window.location.origin+window.location.pathname;
         console.log(currentUrl)
         console.log('Fetching to add view');
-        const currentUrl1= "https://articles.pulsoid.net/p/f7c44ddc-cd15-4829-8bb3-1ab24bcde480/";
 
-        fetch(`/api/blog/addView?uri=${currentUrl}`, {
-            method: 'POST',
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Add View Response:', data);
-
-                if (data.message) {
-                    console.log('Message:', data.message);
-                } else {
-                    console.error('Error adding view: Response format is not as expected');
-                }
-            })
-            .catch(error => console.error('Error adding view:', error));
-        fetch(`/api/blog/addView?uri=${currentUrl}`, {
+        fetch(`https://fathomless-brook-54697-d6085ecbdfdb.herokuapp.com/api/blog/addView?uri=${currentUrl}`, {
             method: 'POST',
         })
             .then(response => {
@@ -60,7 +39,7 @@
             .catch(error => console.error('Error adding view:', error));
 
         console.log('Fetching to update views');
-        fetch(`/api/blog/updateViews?uri=${currentUrl}`, {
+        fetch(`https://fathomless-brook-54697-d6085ecbdfdb.herokuapp.com/api/blog/updateViews?uri=${currentUrl}`, {
             method: 'POST',
         })
             .then(response => {
@@ -81,7 +60,7 @@
             .catch(error => console.error('Error updating views:', error));
 
         console.log('Fetching to get views');
-        fetch(`/api/blog/getViews?uri=${currentUrl}`)
+        fetch(`https://fathomless-brook-54697-d6085ecbdfdb.herokuapp.com/api/blog/getViews?uri=${currentUrl}`)
             .then(response => response.json())
             .then(views => {
                 console.log(`Number of views: ${views}`);
