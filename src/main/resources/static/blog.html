@@ -18,7 +18,7 @@
         console.log(currentUrl)
         console.log('Fetching to add view');
 
-        fetch(`/api/blog/addView?postid=${currentUrl}`, {
+        fetch(`/api/blog/addView?uri=${currentUrl}`, {
             method: 'POST',
         })
             .then(response => {
@@ -38,7 +38,7 @@
                 }
             })
             .catch(error => console.error('Error adding view:', error));
-        fetch(`/api/blog/addView?postid=${currentUrl}`, {
+        fetch(`/api/blog/addView?uri=${currentUrl}`, {
             method: 'POST',
         })
             .then(response => {
@@ -60,7 +60,7 @@
             .catch(error => console.error('Error adding view:', error));
 
         console.log('Fetching to update views');
-        fetch(`/api/blog/updateViews?postid=${currentUrl}`, {
+        fetch(`/api/blog/updateViews?uri=${currentUrl}`, {
             method: 'POST',
         })
             .then(response => {
@@ -83,7 +83,7 @@
 
         // Fetch to get views
         console.log('Fetching to get views');
-        fetch(`/api/blog/getViews?postid=${currentUrl}`)
+        fetch(`/api/blog/getViews?uri=${currentUrl}`)
             .then(response => response.json())
             .then(views => {
                 console.log(`Number of views: ${views}`);
