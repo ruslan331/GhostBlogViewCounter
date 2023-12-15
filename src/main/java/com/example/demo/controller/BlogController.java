@@ -43,7 +43,6 @@ public class BlogController {
         System.out.println("Controller method getBlogViews is being called.");
         List<Blog> blogs = blogService.getAllBlogs();
         model.addAttribute("blogs", blogs);
-        // Log the data
         blogs.forEach(blog -> System.out.println("Blog ID: " + blog.getId() + ", Post ID: " + blog.getUri() + ", Views: " + blog.getViews()));
         return "blogViews";
     }
