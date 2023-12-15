@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Blog Views</title>
+</head>
+<body>
+
+<h1>Blog Views</h1>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Post ID</th>
+        <th>Views</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Iterate over the list of blogs and display each row -->
+    <tr th:each="blog : ${blogs}">
+        <td th:text="${blog.id}"></td>
+        <td th:text="${blog.postId}"></td>
+        <td th:text="${blog.views}"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

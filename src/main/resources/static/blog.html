@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Post Views</title>
+</head>
+<body>
+
+<div>
+    <h1>Blog Post</h1>
+    <p id="viewsCount">Views: Loading...</p>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const postId = 1;
+        const postId1= 12;  // Replace with the actual post ID dynamically
+        console.log('Fetching to add view');
+
+        fetch(`/api/blog/addView?postId=${postId1}`, {
+            method: 'POST',
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json(); // Parse the response as JSON
+            })
+            .then(data => {
+                console.log('Add View Response:', data);
+
+                // Assuming the response has a 'message' property
+                if (data.message) {
+                    console.log('Message:', data.message);
+                } else {
+                    console.error('Error adding view: Response format is not as expected');
+                }
+            })
+            .catch(error => console.error('Error adding view:', error));
+
+        console.log('Fetching to update views');
+        fetch(`/api/blog/updateViews?postId=${postId}`, {
+            method: 'POST',
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json(); // Parse the response as JSON
+            })
+            .then(data => {
+                console.log('Update Views Response:', data);
+
+                // Assuming the response has a 'message' property
+                if (data.message) {
+                    console.log('Message:', data.message);
+                } else {
+                    console.error('Error updating views: Response format is not as expected');
+                }
+            })
+            .catch(error => console.error('Error updating views:', error));
+
+        // Fetch to get views
+        console.log('Fetching to get views');
+        fetch(`/api/blog/getViews?postId=${postId}`)
+            .then(response => response.json())
+            .then(views => {
+                console.log(`Number of views: ${views}`);
+                // Display the number of views on your webpage
+                document.getElementById('viewsCount').innerText = `Views: ${views}`;
+            })
+            .catch(error => console.error('Error getting views:', error));
+    });
+</script>
+
+</body>
+</html>
