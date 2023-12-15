@@ -18,7 +18,7 @@
         console.log(currentUrl)
         console.log('Fetching to add view');
 
-        fetch(`https://fathomless-brook-54697-d6085ecbdfdb.herokuapp.com/api/blog/addView/${currentUrl}`, {
+        fetch(`https://fathomless-brook-54697-d6085ecbdfdb.herokuapp.com/api/blog/addView?uri=${currentUrl}`, {
             method: 'POST',
         })
             .then(response => {
@@ -39,7 +39,7 @@
             .catch(error => console.error('Error adding view:', error));
 
         console.log('Fetching to update views');
-        fetch(`https://fathomless-brook-54697-d6085ecbdfdb.herokuapp.com/api/blog/updateViews/${currentUrl}`, {
+        fetch(`https://fathomless-brook-54697-d6085ecbdfdb.herokuapp.com/api/blog/updateViews?uri=${currentUrl}`, {
             method: 'POST',
         })
             .then(response => {
@@ -60,7 +60,7 @@
             .catch(error => console.error('Error updating views:', error));
 
         console.log('Fetching to get views');
-        fetch(`https://fathomless-brook-54697-d6085ecbdfdb.herokuapp.com/api/blog/getViews/${currentUrl}`)
+        fetch(`https://fathomless-brook-54697-d6085ecbdfdb.herokuapp.com/api/blog/getViews?uri=${currentUrl}`)
             .then(response => response.json())
             .then(views => {
                 console.log(`Number of views: ${views}`);
