@@ -22,7 +22,7 @@ public class BlogController {
             blogService.updateViews(uri);
             return ResponseEntity.ok("Views updated successfully");
         } catch (Exception e) {
-            e.printStackTrace(); // Log the exception details
+            e.printStackTrace();
             return ResponseEntity.status(500).body("Internal Server Error");
         }
     }
@@ -33,8 +33,8 @@ public class BlogController {
             Long views = blogService.getViews(uri);
             return ResponseEntity.ok(views);
         } catch (Exception e) {
-            e.printStackTrace(); // Log the exception details
-            return ResponseEntity.status(500).body(-1L); // Return a default value or handle as needed
+            e.printStackTrace();
+            return ResponseEntity.status(500).body(-1L);
         }
     }
     @GetMapping("/blogViews")
@@ -44,7 +44,7 @@ public class BlogController {
         model.addAttribute("blogs", blogs);
         // Log the data
         blogs.forEach(blog -> System.out.println("Blog ID: " + blog.getId() + ", Post ID: " + blog.getUri() + ", Views: " + blog.getViews()));
-        return "blogViews"; // assuming you have a Thymeleaf template named "blogViews.html"
+        return "blogViews";
     }
     @PostMapping("/addView")
     public ResponseEntity<String> addView(@RequestParam String uri) {
@@ -55,5 +55,10 @@ public class BlogController {
             e.printStackTrace();
             return ResponseEntity.status(500).body("Internal Server Error");
         }
+    }
+
+    @GetMapping("/")
+    public String showHtmlPage() {
+        return "index";
     }
 }
