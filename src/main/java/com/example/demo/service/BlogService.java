@@ -14,39 +14,24 @@ public class BlogService {
     private BlogRepository blogRepository;
 
     @Transactional
-    public void updateViews(Integer postid) {
-        Blog blog = blogRepository.findByPostid(postid);
-        if (blog == null) {
-            throw new RuntimeException("Blog post not found");
-        }
-
+    public void updateViews(String uri) {
+        Blog blog = blogRepository.findByUri(uri);
         blog.setViews(blog.getViews() + 1);
         blogRepository.save(blog);
-        System.out.println("ASDASDASDASDASDA");
+        System.out.println("Views updated successfully");
     }
 
-    public int getViews(Integer postid) {
-        Blog blog = blogRepository.findByPostid(postid);
-        if (blog == null) {
-            throw new RuntimeException("Blog post not found");
-        }
-
+    public Long getViews(String uri) {
+        Blog blog = blogRepository.findByUri(uri);
         return blog.getViews();
     }
 
-    public void addView(Integer postid) {
-        Blog existingBlog = blogRepository.findByPostid(postid);
-
-        if (existingBlog == null) {
-            Blog newBlog = new Blog();
-            newBlog.setPostid(postid);
-            newBlog.setViews(0);
-
-            blogRepository.save(newBlog);
-            System.out.println("View added successfully");
-        } else {
-            System.out.println("View not added, record already exists for postid: " + postid);
-        }
+    public void addView(String uri) {
+        Blog blog = new Blog();
+        blog.setUri(uri);
+        blog.setViews(0L);
+        blogRepository.save(blog);
+        System.out.println("View added successfully");
     }
 
     public List<Blog> getAllBlogs() {

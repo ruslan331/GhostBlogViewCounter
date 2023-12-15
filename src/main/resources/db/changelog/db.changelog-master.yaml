@@ -1,6 +1,12 @@
 databaseChangeLog:
   - changeSet:
-      id: 1
+      id: dropTableblogviews
+      author: ruslan
+      changes:
+        - dropTable:
+            tableName: blog_views
+  - changeSet:
+      id: create_columns_and_table
       author: ruslan
       changes:
         - createTable:
@@ -8,53 +14,19 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  type: int
+                  type: uuid
                   autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: postId
-                  type: int
+                  name: uri
+                  type: varchar(1000)
                   constraints:
                     nullable: false
+                    unique: true
               - column:
                   name: views
-                  type: int
+                  type: bigint
                   constraints:
                     nullable: false
-  - changeSet:
-      id: 2
-      author: ruslan
-      changes:
-        - insert:
-            tableName: blog_views
-            columns:
-              - column:
-                  name: postId
-                  value: "1"
-              - column:
-                  name: views
-                  value: "5"
-  - changeSet:
-      id: 3
-      author: ruslan
-      changes:
-        - insert:
-            tableName: blog_views
-            columns:
-              - column:
-                  name: postId
-                  value: "2"
-              - column:
-                  name: views
-                  value: "3"
-  - changeSet:
-      id: renameColumn-example
-      author: ruslan
-      changes:
-        - renameColumn:
-            columnDataType: int
-            newColumnName: postid
-            oldColumnName: postId
-            tableName: blog_views

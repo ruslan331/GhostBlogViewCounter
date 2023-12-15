@@ -17,9 +17,9 @@ public class BlogController {
     private BlogService blogService;
 
     @PostMapping("/updateViews")
-    public ResponseEntity<String> updateViews(@RequestParam Integer postid) {
+    public ResponseEntity<String> updateViews(@RequestParam String uri) {
         try {
-            blogService.updateViews(postid);
+            blogService.updateViews(uri);
             return ResponseEntity.ok("Views updated successfully");
         } catch (Exception e) {
             e.printStackTrace(); // Log the exception details
@@ -28,13 +28,13 @@ public class BlogController {
     }
 
     @GetMapping("/getViews")
-    public ResponseEntity<Integer> getViews(@RequestParam Integer postid) {
+    public ResponseEntity<Long> getViews(@RequestParam String uri) {
         try {
-            int views = blogService.getViews(postid);
+            Long views = blogService.getViews(uri);
             return ResponseEntity.ok(views);
         } catch (Exception e) {
             e.printStackTrace(); // Log the exception details
-            return ResponseEntity.status(500).body(-1); // Return a default value or handle as needed
+            return ResponseEntity.status(500).body(-1L); // Return a default value or handle as needed
         }
     }
     @GetMapping("/blogViews")
@@ -43,13 +43,13 @@ public class BlogController {
         List<Blog> blogs = blogService.getAllBlogs();
         model.addAttribute("blogs", blogs);
         // Log the data
-        blogs.forEach(blog -> System.out.println("Blog ID: " + blog.getId() + ", Post ID: " + blog.getPostid() + ", Views: " + blog.getViews()));
+        blogs.forEach(blog -> System.out.println("Blog ID: " + blog.getId() + ", Post ID: " + blog.getUri() + ", Views: " + blog.getViews()));
         return "blogViews"; // assuming you have a Thymeleaf template named "blogViews.html"
     }
     @PostMapping("/addView")
-    public ResponseEntity<String> addView(@RequestParam Integer postid) {
+    public ResponseEntity<String> addView(@RequestParam String uri) {
         try {
-            blogService.addView(postid);
+            blogService.addView(uri);
             return ResponseEntity.ok("View added successfully");
         } catch (Exception e) {
             e.printStackTrace();

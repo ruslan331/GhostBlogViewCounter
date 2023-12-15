@@ -1,42 +1,45 @@
 package com.example.demo.model;
 import jakarta.persistence.*;
 
+import java.util.UUID;
+
 @Entity
 @Table(name = "blog_views")
 public class Blog {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
-    @Column(name = "postid")
-    private Integer postid;
+    @Column(name = "uri", unique = true, length = 1000)
+    private String uri;
 
-    private Integer views;
+    @Column(name = "views")
+    private Long views;
 
     // Getters
-    public long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public Integer getPostid() {
-        return postid;
+    public String getUri() {
+        return uri;
     }
 
-    public Integer getViews() {
+    public Long getViews() {
         return views;
     }
 
     // Setters
-    public void setId(long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
-    public void setPostid(Integer postId) {
-        this.postid = postId;
+    public void setUri(String uri) {
+        this.uri = uri;
     }
 
-    public void setViews(Integer views) {
+    public void setViews(Long views) {
         this.views = views;
     }
 }
