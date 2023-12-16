@@ -101,7 +101,7 @@
 <script>
     function copyCodeToClipboard() {
         const codeBlock = document.getElementById('codeBlock');
-        const codeText = codeBlock.innerText;
+        const codeText = codeBlock.textContent;
 
         // Create a temporary textarea to copy the code
         const tempTextArea = document.createElement('textarea');
