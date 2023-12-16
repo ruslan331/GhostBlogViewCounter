@@ -96,30 +96,17 @@
     });
 &lt;/script&gt;
 </code></pre>
-<button class="copy-button" onclick="copyCodeToClipboard()">Copy Code</button>
+<button class="copy-button" onclick="copyCodeToClipboard()">Copy code</button>
 
 <script>
     function copyCodeToClipboard() {
-        const codeBlock = document.getElementById('codeBlock');
-
-        // Force Prism to highlight the code
-        Prism.highlightElement(codeBlock);
-
-        const codeText = codeBlock.textContent || codeBlock.innerText;
-
-        // Create a temporary textarea to copy the code
-        const tempTextArea = document.createElement('textarea');
-        tempTextArea.value = codeText;
-        document.body.appendChild(tempTextArea);
-
-        // Select and copy the code
-        tempTextArea.select();
+        const codeSnippet = document.getElementById('codeSnippet');
+        const range = document.createRange();
+        range.selectNode(codeSnippet);
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
         document.execCommand('copy');
-
-        // Remove the temporary textarea
-        document.body.removeChild(tempTextArea);
-
-        // Provide visual feedback (optional)
+        window.getSelection().removeAllRanges();
         alert('Code copied to clipboard!');
     }
 </script>
