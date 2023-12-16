@@ -10,11 +10,13 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            margin: 40px;
+            margin: 20px;
+            font-size: 24px;
         }
-        #button {
+        button {
             cursor: pointer;
             background-color: #007bff;
+            font-size: 30px;
             color: #fff;
             padding: 5px 10px;
             border: none;
@@ -33,10 +35,11 @@
 
 <h1>Show your blog views count to everyone</h1>
 
-<p>This is some text in a regular paragraph.</p>
-
-<p>Now, let's display some code:</p>
-
+<p>1. Open post editor</p>
+<p>2. Click on the empty line</p>
+<p>3. You should see + sign. Click on it</p>
+<p>4. Select HTML from the list</p>
+<p>5. Copy and paste code below (there is a Copy button under the code)</p>
 <pre><code id="codeToCopy" class="language-markup">
 &lt;div&gt;
     &lt;p id="viewsCount"&gt;loading... views&lt;/p&gt;
@@ -114,6 +117,30 @@
 
     document.getElementById('button').addEventListener('click', copyFunction);
 </script>
+<p>6. You can also change css style for your views counter. Click Posts at the top-right corner -> Setting icon in the left-bottom corner -> find Code Injection in the list at the left side (Advanced section) -> click Edit in the Code Injection -> select Site Header -> copy code below (change if you want) -> click Save</p>
+<pre><code id="csscodeToCopy" class="language-markup">
+&lt;style&gt;
+        /* Apply CSS styles to the p element with id "viewsCount" */
+        #viewsCount {
+            font-size: 14px;
+            color: #333;
+            margin-top: 10px;
+            /* Add any other styles you want to apply */
+        }
+&lt;/style&gt;
+</code></pre>
+<button id="buttonCSS">Copy</button>
+<script>
+    function copyFunctionCSS() {
+        const copyText = document.getElementById("csscodeToCopy").textContent;
+        const textArea = document.createElement('textarea');
+        textArea.textContent = copyText;
+        document.body.append(textArea);
+        textArea.select();
+        document.execCommand("copy");
+    }
 
+    document.getElementById('buttonCSS').addEventListener('click', copyFunctionCSS);
+</script>
 </body>
 </html>
