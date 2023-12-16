@@ -21,6 +21,10 @@
             border-radius: 4px;
             margin-bottom: 10px;
         }
+        textarea {
+            position: absolute;
+            left: -100%;
+        }
 
     </style>
 
@@ -33,7 +37,7 @@
 
 <p>Now, let's display some code:</p>
 
-<pre><code class="language-markup">
+<pre><code id="codeToCopy" class="language-markup">
 &lt;div&gt;
     &lt;p id="viewsCount"&gt;loading... views&lt;/p&gt;
 &lt;/div&gt;
@@ -101,28 +105,18 @@
 </script>
 &lt;/script&gt;
 </code></pre>
+<button id="button">Copy</button>
 <script>
-    function enableCopy(selector = "pre", childSelector = "code", btnText = "Copy Me", btnTextSuccess = "Copied", activeClass = "--copy") {
-        document.querySelectorAll(`${selector}:not(.${activeClass})`).forEach(node => {
-            // create a "copy" button
-            let copyBtn = document.createElement("button");
-            copyBtn.innerText = btnText;
-            // activeClass acts as flag so we don't add another copy button by  mistake
-            copyBtn.classList.add(activeClass);
-            node.appendChild(copyBtn);
-            copyBtn.addEventListener("click", async () => {
-                // copy to clipboard
-                if (navigator.clipboard) {
-                    let text = node.querySelector(childSelector).innerText;
-                    await navigator.clipboard.writeText();
-                }
-                // change text of button after copying
-                copyBtn.innerText = btnTextSuccess;
-                // change text back to normal after ### ms
-                setTimeout(() => icon.innerText = btnText, 2000);
-            })
-        })
+    function copyFunction() {
+        const copyText = document.getElementById("codeToCopy").textContent;
+        const textArea = document.createElement('textarea');
+        textArea.textContent = copyText;
+        document.body.append(textArea);
+        textArea.select();
+        document.execCommand("copy");
     }
+
+    document.getElementById('button').addEventListener('click', copyFunction);
 </script>
 
 </body>
