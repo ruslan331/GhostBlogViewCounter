@@ -1,11 +1,5 @@
 databaseChangeLog:
   - changeSet:
-      id: dropTableblogviews
-      author: ruslan
-      changes:
-        - dropTable:
-            tableName: blog_views
-  - changeSet:
       id: create_columns_and_table
       author: ruslan
       changes:
