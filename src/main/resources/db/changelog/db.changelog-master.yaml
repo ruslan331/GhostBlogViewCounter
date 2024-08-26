@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: create_columns_and_table
+      id: create_blog_views_table
       author: ruslan
       changes:
         - createTable:
@@ -23,3 +23,65 @@ databaseChangeLog:
                   type: bigint
                   constraints:
                     nullable: false
+
+  - changeSet:
+      id: create_users_table
+      author: ruslan
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+
+  - changeSet:
+      id: create_scripts_table
+      author: ruslan
+      changes:
+        - createTable:
+            tableName: scripts
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: uri
+                  type: varchar(1000)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: views
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: add_foreign_key_to_scripts
+      author: ruslan
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: scripts
+            baseColumnNames: user_id
+            referencedTableName: users
+            referencedColumnNames: id
+            constraintName: fk_scripts_user_id
+            onDelete: CASCADE

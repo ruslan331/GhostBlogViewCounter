@@ -1,12 +1,14 @@
 package com.example.demo.controller;
+
 import com.example.demo.model.Blog;
 import com.example.demo.service.BlogService;
-import com.example.demo.repository.BlogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @RestController
@@ -18,9 +20,10 @@ public class BlogController {
     private BlogService blogService;
 
     @PostMapping("/updateViews")
-    public ResponseEntity<String> updateViews(@RequestParam String uri) {
+    public ResponseEntity<String> updateViews(@RequestParam String uri, Authentication authentication) {
         try {
-            blogService.updateViews(uri);
+            String decodedUri = URLDecoder.decode(uri, StandardCharsets.UTF_8.name());
+            blogService.updateViews(decodedUri, authentication);
             return ResponseEntity.ok("Views updated successfully");
         } catch (Exception e) {
             e.printStackTrace();
@@ -29,27 +32,22 @@ public class BlogController {
     }
 
     @GetMapping("/getViews")
-    public ResponseEntity<Long> getViews(@RequestParam String uri) {
+    public ResponseEntity<Long> getViews(@RequestParam String uri, Authentication authentication) {
         try {
-            Long views = blogService.getViews(uri);
+            String decodedUri = URLDecoder.decode(uri, StandardCharsets.UTF_8.name());
+            Long views = blogService.getViews(decodedUri, authentication);
             return ResponseEntity.ok(views);
         } catch (Exception e) {
             e.printStackTrace();
-            return ResponseEntity.status(500).body(-1L);
+            return ResponseEntity.status(500).body(null);
         }
     }
-    @GetMapping("/blogViews")
-    public String getBlogViews(Model model) {
-        System.out.println("Controller method getBlogViews is being called.");
-        List<Blog> blogs = blogService.getAllBlogs();
-        model.addAttribute("blogs", blogs);
-        blogs.forEach(blog -> System.out.println("Blog ID: " + blog.getId() + ", Post ID: " + blog.getUri() + ", Views: " + blog.getViews()));
-        return "blogViews";
-    }
+
     @PostMapping("/addView")
-    public ResponseEntity<String> addView(@RequestParam String uri) {
+    public ResponseEntity<String> addView(@RequestParam String uri, Authentication authentication) {
         try {
-            blogService.addView(uri);
+            String decodedUri = URLDecoder.decode(uri, StandardCharsets.UTF_8.name());
+            blogService.addView(decodedUri, authentication);
             return ResponseEntity.ok("View added successfully");
         } catch (Exception e) {
             e.printStackTrace();
@@ -57,8 +55,13 @@ public class BlogController {
         }
     }
 
-    @GetMapping("/")
-    public String showHtmlPage() {
-        return "index";
+    @GetMapping("/scripts")
+    public ResponseEntity<List<?>> getScripts(Authentication authentication) {
+        try {
+            return ResponseEntity.ok(blogService.getAllScripts(authentication));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body(null);
+        }
     }
 }
